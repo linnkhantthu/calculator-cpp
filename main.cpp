@@ -6,33 +6,72 @@ enum Commands
     add,
     sub,
     mul,
-    div,
+    divi,
     modulus,
+    squrt,
     invalid
 };
-Commands hashit(std::string const &inString);
+
+Commands hashit(std::string const inString);
+double twoNumberOperations(Commands op);
+double squareRoot();
 
 int main()
 {
     std::string op;
-    std::string commands[5] = {"add", "sub", "mul", "div", "modulus"};
+    std::string commands[6] = {"add", "sub", "mul", "divi", "modulus", "squrt"};
+    std::string availableCommands;
+    for (int i = 0; i < 6; i++)
+    {
+        if (i == 5)
+        {
+            availableCommands += commands[i];
+        }
+        else
+        {
+            availableCommands += commands[i] + ", ";
+        }
+    }
+
     std::cout << "Terminal Calculator by Linn";
-    std::cout << "Available commands: " << commands << ": ";
+    std::cout << "Available commands (" << availableCommands << "): ";
     std::cin >> op;
     switch (hashit(op))
     {
     case add:
-        /* code */
+        std::cout << twoNumberOperations(hashit(op));
         break;
-
+    case sub:
+        std::cout << twoNumberOperations(hashit(op));
+        break;
+    case mul:
+        std::cout << twoNumberOperations(hashit(op));
+        break;
+    case divi:
+        std::cout << twoNumberOperations(hashit(op));
+        break;
+    case modulus:
+        std::cout << twoNumberOperations(hashit(op));
+        break;
+    case squrt:
+        std::cout << squareRoot();
+        break;
     default:
+        std::cout << "Invalid Operation\n";
         break;
     }
     return 0;
 }
 
-double twoNumberOperations(Commands op, double num_1, double num_2)
+double twoNumberOperations(Commands op)
 {
+    double num_1, num_2;
+
+    std::cout << "Enter first number: ";
+    std::cin >> num_1;
+
+    std::cout << "Enter second number: ";
+    std::cin >> num_2;
 
     double result;
     switch (op)
@@ -46,7 +85,7 @@ double twoNumberOperations(Commands op, double num_1, double num_2)
     case mul:
         result = num_1 * num_2;
         break;
-    case div:
+    case divi:
         result = num_1 / num_2;
         break;
     case modulus:
@@ -59,18 +98,42 @@ double twoNumberOperations(Commands op, double num_1, double num_2)
     }
     return result;
 }
-Commands hashit(std::string const &inString)
+Commands hashit(std::string const inString)
 {
     if (inString == "add")
+    {
         return add;
+    }
     else if (inString == "sub")
+    {
         return sub;
+    }
     else if (inString == "mul")
-        return sub;
-    else if (inString == "div")
-        return sub;
+    {
+        return mul;
+    }
+    else if (inString == "divi")
+    {
+        return divi;
+    }
     else if (inString == "modulus")
-        return sub;
+    {
+        return modulus;
+    }
+    else if (inString == "squrt")
+    {
+        return squrt;
+    }
     else
+    {
         return invalid;
+    }
+}
+
+double squareRoot()
+{
+    double x;
+    std::cout << "Enter Number: ";
+    std::cin >> x;
+    return sqrt(x);
 }
